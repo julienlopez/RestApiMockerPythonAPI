@@ -18,11 +18,24 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Testing :: Mocking",
 ]
 
 [project.optional-dependencies]
 test = ["pytest>=7", "responses>=0.23"]
+dev = [
+    "pytest>=7",
+    "responses>=0.23",
+    "ruff>=0.4",
+    "mypy>=1.8",
+    "types-requests",
+]
 
 [project.urls]
 Homepage = "https://github.com/julienlopez/RestApiMockerPythonAPI"
@@ -33,3 +46,13 @@ packages = ["src/rest_api_mocker"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+strict = true

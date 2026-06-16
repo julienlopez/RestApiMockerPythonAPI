@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import Any, List, Optional, Sequence
+from typing import Any, Sequence
 
 import requests
 
@@ -34,7 +34,7 @@ class RestApiMocker:
         port: int,
         *,
         timeout: float = DEFAULT_TIMEOUT,
-        session: Optional[requests.Session] = None,
+        session: requests.Session | None = None,
     ) -> None:
         """Create a client.
 
@@ -82,7 +82,7 @@ class RestApiMocker:
         path_pattern: str,
         status: int,
         body: Any,
-        conditions: Optional[Sequence[dict]] = None,
+        conditions: Sequence[dict[str, Any]] | None = None,
     ) -> None:
         """Register a mock response on the server (``POST /internal/mock``).
 
@@ -105,7 +105,7 @@ class RestApiMocker:
         }
         self._request("POST", "/mock", json=mock_definition)
 
-    def get_mocks(self) -> List[MockConfig]:
+    def get_mocks(self) -> list[MockConfig]:
         """Return all configured mocks (``GET /internal/mocks``)."""
         response = self._request("GET", "/mocks")
         return [MockConfig.from_dict(item) for item in response.json()]
@@ -145,7 +145,7 @@ class RestApiMocker:
         response = self._request("GET", "/config")
         return ServerConfig.from_dict(response.json())
 
-    def get_history(self) -> List[RequestRecord]:
+    def get_history(self) -> list[RequestRecord]:
         """Return the recorded request history (``GET /internal/history``)."""
         response = self._request("GET", "/history")
         return [RequestRecord.from_dict(item) for item in response.json()]
@@ -157,7 +157,7 @@ class RestApiMocker:
         if self._owns_session:
             self._session.close()
 
-    def __enter__(self) -> "RestApiMocker":
+    def __enter__(self) -> RestApiMocker:
         return self
 
     def __exit__(self, *exc_info: object) -> None:

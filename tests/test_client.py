@@ -128,9 +128,7 @@ def test_get_mocks():
 
 @responses.activate
 def test_delete_mock_by_index():
-    responses.add(
-        responses.DELETE, f"{BASE}/mock/0", status=200, body="Mock deleted"
-    )
+    responses.add(responses.DELETE, f"{BASE}/mock/0", status=200, body="Mock deleted")
 
     make_mocker().delete_mock(0)
     assert responses.calls[0].request.url == f"{BASE}/mock/0"
@@ -138,9 +136,7 @@ def test_delete_mock_by_index():
 
 @responses.activate
 def test_delete_mock_out_of_range_raises():
-    responses.add(
-        responses.DELETE, f"{BASE}/mock/99", status=404, body="out of range"
-    )
+    responses.add(responses.DELETE, f"{BASE}/mock/99", status=404, body="out of range")
 
     with pytest.raises(MockRequestError) as exc_info:
         make_mocker().delete_mock(99)

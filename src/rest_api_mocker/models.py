@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, List
+from typing import Any
 
 
 @dataclass
@@ -14,7 +14,7 @@ class ServerConfig:
     private_port: int
 
     @classmethod
-    def from_dict(cls, data: dict) -> "ServerConfig":
+    def from_dict(cls, data: dict[str, Any]) -> ServerConfig:
         return cls(
             public_port=data["public_port"],
             private_port=data["private_port"],
@@ -33,7 +33,7 @@ class RequestRecord:
     timestamp: int
 
     @classmethod
-    def from_dict(cls, data: dict) -> "RequestRecord":
+    def from_dict(cls, data: dict[str, Any]) -> RequestRecord:
         return cls(
             method=data["method"],
             path=data["path"],
@@ -53,10 +53,10 @@ class MockConfig:
     path_pattern: str
     status: int
     body: str
-    conditions: List[Any] = field(default_factory=list)
+    conditions: list[Any] = field(default_factory=list)
 
     @classmethod
-    def from_dict(cls, data: dict) -> "MockConfig":
+    def from_dict(cls, data: dict[str, Any]) -> MockConfig:
         return cls(
             method=data["method"],
             path_pattern=data["path_pattern"],
