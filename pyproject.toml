@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rest-api-mocker"
+version = "0.1.0"
+description = "A small Python wrapper for RestApiMocker."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [{ name = "Julien Lopez", email = "julien.lopez51@gmail.com" }]
+keywords = ["mock", "rest", "api", "testing", "http"]
+dependencies = ["requests>=2.20"]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Testing :: Mocking",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "responses>=0.23"]
+
+[project.urls]
+Homepage = "https://github.com/julienlopez/RestApiMockerPythonAPI"
+Repository = "https://github.com/julienlopez/RestApiMockerPythonAPI"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rest_api_mocker"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
